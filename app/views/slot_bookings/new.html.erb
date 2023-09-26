@@ -1,0 +1,36 @@
+<h1>Slot Booking Page</h1>
+
+<%= form_with model: @slot_booking, url: slot_bookings_path, method: :post do |form| %>
+  <% if @slot_booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@slot_booking.errors.count, "error") %> prohibited this slot booking from being saved:</h2>
+
+      <ul>
+        <% @slot_booking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :entry_point_id, "Entrance number" %>
+    <%= form.collection_select :entry_point_id, @entry_points, :id, :name, prompt: 'Select an entry point' %>
+  </div>
+  <br>
+  <div class="field">
+    <%= form.label :vehicle_registration_number, "Enter vehicle registration number" %>
+    <%= form.text_field :vehicle_registration_number, class: "form-control" %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= form.submit "Book Slot" %>
+  </div>
+<% end %>
+
+<br>
+<%= link_to "Used slots", slot_bookings_path %> |
+<%= link_to "Allocation history", allocation_history_slot_bookings_path %> |
+<%= link_to "Entries", first_entry_slot_bookings_path %>
+
+<%= link_to "My bookings", my_bookings_slot_bookings_path %>
