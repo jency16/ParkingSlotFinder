@@ -1,0 +1,33 @@
+<h1>Slots</h1>
+
+<%= form_tag(slot_bookings_path, method: :get) do %>
+  <div class="field">
+    <%= label_tag 'date', 'Select a Date:' %>
+    <%= date_field_tag 'date', params[:date] %>
+  </div>
+  <%= submit_tag 'Show Slots' %>
+<% end %>
+
+<% if @slot_bookings.present? %>
+  <h2>Slots used on <%= @date %>:</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Slot Number</th>
+      <th>Vehicle Registration Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @slot_bookings.each do |slot_usage| %>
+      <tr>
+        <td><%= slot_usage.slot.number %></td>
+        <td><%= slot_usage.vehicle_registration_number %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No slots used on the selected date.</p>
+<% end %>
+
+<%= link_to "Back",new_slot_booking_path %>

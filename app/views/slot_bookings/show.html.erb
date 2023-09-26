@@ -1,0 +1,9 @@
+<h1>Booking details</h1>
+<div>
+  <p>Entry point: <%= @slot_booking.entry_point_id %></p>
+  <p>Entry time: <%= @slot_booking.entry_time %></p>
+  <p>Registration Number: <%= @slot_booking.vehicle_registration_number %></p>
+  <p>Slot: <%= @slot_booking.slot_id %></p>
+</div>
+
+<%= link_to "Back",new_slot_booking_path %>

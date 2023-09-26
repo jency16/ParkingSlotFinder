@@ -1,0 +1,2 @@
+class EntryPoint < ApplicationRecord
+end

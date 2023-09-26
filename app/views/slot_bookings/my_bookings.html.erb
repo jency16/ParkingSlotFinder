@@ -1,0 +1,30 @@
+<h1>First Entries</h1>
+
+<% if @slot_bookings.present? %>
+  <table>
+    <thead>
+    <tr>
+      <th>Vehicle number</th>
+      <th>Entered Slot</th>
+      <th>Entry Date</th>
+      <th>Entry Time</th>
+      <th>Cancel</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @slot_bookings.each do |slot_usage| %>
+      <tr>
+        <td><%= slot_usage.vehicle_registration_number %></td>
+        <td><%= slot_usage.slot.number %></td>
+        <td><%= slot_usage.entry_time.to_datetime.strftime('%B %d, %Y') %></td>
+        <td><%= slot_usage.entry_time.to_datetime.strftime('%l:%M %p') %></td>
+        <%if slot_usage.slot.occupied? %>
+        <td><%= button_to "Cancel", cancel_slot_booking_path(slot_usage), method: :put, data: { confirm: "Are you sure you want to cancel this booking?" }, class: "btn btn-danger" %></td>
+        <%end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No allocation history.</p>
+<% end %>
